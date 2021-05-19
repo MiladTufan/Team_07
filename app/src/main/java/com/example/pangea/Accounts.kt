@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.DialogFragment
 import com.facebook.FacebookSdk
+import com.facebook.login.widget.LoginButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.account_view.*
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +37,7 @@ class Accounts() : DialogFragment(), TwitterHandler.ITwitterCallback, FacebookHa
     lateinit var twitter_login_btn: Button
     lateinit var fHandler: FacebookHandler
     lateinit var login_button_facebook: Button
-    lateinit var hidden_facebook_button: Button
+    lateinit var hidden_facebook_button: LoginButton
     lateinit var add_account_button: FloatingActionButton
     lateinit var twitter_image: ImageView
     lateinit var account_view: View
@@ -139,6 +140,8 @@ class Accounts() : DialogFragment(), TwitterHandler.ITwitterCallback, FacebookHa
 
         fHandler = FacebookHandler(context, user, activity)
         fHandler.initApi(this)
+
+        hidden_facebook_button.setPermissions("pages_show_list");
         if(fHandler.hasLinkedAccount())
         {
             login_button_facebook.text = getString(R.string.facebook_unlink_text)
@@ -147,11 +150,14 @@ class Accounts() : DialogFragment(), TwitterHandler.ITwitterCallback, FacebookHa
         {
             login_button_facebook.text = getString(R.string.facebook_link_text)
         }
+
+
         login_button_facebook.setOnClickListener {
             hidden_facebook_button.performClick()
         }
 
         hidden_facebook_button.setOnClickListener {
+
             if(fHandler.isLoggedIn())
             {
                 fHandler.logoutFacebook();
@@ -161,6 +167,7 @@ class Accounts() : DialogFragment(), TwitterHandler.ITwitterCallback, FacebookHa
                 fHandler.loginFacebook();
             }
         }
+
 
         return account_view
     }
@@ -240,8 +247,9 @@ class Accounts() : DialogFragment(), TwitterHandler.ITwitterCallback, FacebookHa
         val logout_account: Button = Button(context)
         logout_account.text = "Logout"
         logout_account.setBackgroundColor(Color.parseColor("#B86566"));
-        val draw: Drawable = Drawable.createFromPath( "@drawable/round_style")!!
-        logout_account.background =draw
+        val draw: Drawable? = Drawable.createFromPath(R.drawable.round_style.toString())
+
+        logout_account.background = draw
 
         logout_account.setOnClickListener {
             twitter_login_btn.performClick()

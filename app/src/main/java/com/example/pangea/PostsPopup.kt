@@ -43,7 +43,8 @@ class PostsPopup : AppCompatActivity(), TwitterHandler.ITwitterCallback, Faceboo
             thandler.initTwitterApi()
 
             // call facebook or twitter post message here
-            if(facebook_check) {
+            if(facebook_check)
+            {
                 var postId = fhandler.postMessage(message.toString())
                 register.addFBPost(userEmail, message.toString(), null, applicationContext, postId.toString())
             }

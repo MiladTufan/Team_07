@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Pangea</string>
-    <string name="facebook_app_id">171191854853298</string>
-    <string name="fb_login_protocol_scheme">fb171191854853298</string>
+    <string name="facebook_app_id">1739804412857659</string>
+    <string name="fb_login_protocol_scheme">fb1739804412857659</string>
 
     <string name="accounts_tab">Accounts tab</string>
     <!--- Warning: The tab names declared here are irrelevant! -->
